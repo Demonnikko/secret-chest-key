@@ -68,6 +68,29 @@ const getKeyCount = () => {
   return 48; // desktop
 };
 
+const DAILY_ATTEMPTS = 3;
+
+const getGameData = () => {
+  const today = new Date().toDateString();
+  const stored = localStorage.getItem('treasureGame');
+  if (!stored) return { date: today, attempts: 0 };
+  
+  try {
+    const data = JSON.parse(stored);
+    if (data.date !== today) {
+      return { date: today, attempts: 0 };
+    }
+    return data;
+  } catch {
+    return { date: today, attempts: 0 };
+  }
+};
+
+const saveGameData = (attempts: number) => {
+  const today = new Date().toDateString();
+  localStorage.setItem('treasureGame', JSON.stringify({ date: today, attempts }));
+};
+
 export function TreasureGame() {
   const [keys, setKeys] = useState<Array<{ variant: 'common' | 'rare' | 'epic'; rotation: number }>>([]);
   const [isChestShaking, setIsChestShaking] = useState(false);
@@ -76,17 +99,20 @@ export function TreasureGame() {
   const [showModal, setShowModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiIntensity, setConfettiIntensity] = useState<'normal' | 'epic' | 'legendary'>('normal');
-  const [showForm, setShowForm] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    telegram: ''
-  });
+  const [attemptsLeft, setAttemptsLeft] = useState(DAILY_ATTEMPTS);
+  const [gameBlocked, setGameBlocked] = useState(false);
   
   const { toast } = useToast();
   const audioContext = useRef<AudioContext | null>(null);
+
+  // Check attempts on mount
+  useEffect(() => {
+    const gameData = getGameData();
+    const remaining = DAILY_ATTEMPTS - gameData.attempts;
+    setAttemptsLeft(remaining);
+    setGameBlocked(remaining <= 0);
+  }, []);
 
   // Initialize keys
   useEffect(() => {
@@ -191,7 +217,18 @@ export function TreasureGame() {
   }, []);
 
   const handleKeyClick = useCallback((keyIndex: number) => {
-    if (isChestShaking || isChestOpening) return;
+    if (isChestShaking || isChestOpening || gameBlocked) return;
+
+    // Use attempt
+    const gameData = getGameData();
+    const newAttempts = gameData.attempts + 1;
+    saveGameData(newAttempts);
+    
+    const remaining = DAILY_ATTEMPTS - newAttempts;
+    setAttemptsLeft(remaining);
+    if (remaining <= 0) {
+      setGameBlocked(true);
+    }
 
     const keyVariant = keys[keyIndex]?.variant || 'common';
     
@@ -239,52 +276,11 @@ export function TreasureGame() {
     setIsChestOpening(false);
   }, []);
 
-  const handleTryAgain = useCallback(() => {
+  const handleCloseModal = useCallback(() => {
     setShowModal(false);
     setShowConfetti(false);
     setCurrentPrize(null);
-    setShowForm(false);
-    setFormData({ name: '', telegram: '' });
   }, []);
-
-  const handleGetCoupon = useCallback(() => {
-    setShowForm(true);
-  }, []);
-
-  const handleSubmitForm = useCallback(async () => {
-    if (!formData.name.trim() || !formData.telegram.trim()) {
-      toast({
-        title: "Ошибка",
-        description: "Пожалуйста, заполните все поля",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      toast({
-        title: "Успешно!",
-        description: "Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время!",
-      });
-      
-      setShowModal(false);
-      setShowForm(false);
-      setFormData({ name: '', telegram: '' });
-    } catch (error) {
-      toast({
-        title: "Ошибка",
-        description: "Не удалось отправить заявку. Попробуйте еще раз.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [formData, toast]);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -342,17 +338,34 @@ export function TreasureGame() {
                 <p>• Каждый ключ открывает сундук с уникальным призом</p>
                 <p>• Редкие ключи ★ дают больше шансов на крупные призы</p>
                 <p>• Эпические ключи ◆ практически гарантируют отличный приз</p>
+                <p>• У вас есть 3 попытки в день</p>
                 <p>• Сделайте скриншот купона и пришлите в группу "Шоу Секрет"</p>
               </div>
               
               <div className="mt-6 flex flex-wrap gap-3">
-                <div className="px-3 py-2 bg-gold-500/10 border border-gold-500/30 rounded-lg text-sm">
-                  Ключей на поле: {keys.length}
+                <div className={cn(
+                  "px-3 py-2 border rounded-lg text-sm",
+                  attemptsLeft > 0 
+                    ? "bg-gold-500/10 border-gold-500/30" 
+                    : "bg-red-500/10 border-red-500/30"
+                )}>
+                  Попыток осталось: {attemptsLeft}
                 </div>
                 <div className="px-3 py-2 bg-purple-500/10 border border-purple-500/30 rounded-lg text-sm">
                   Редких ключей: {keys.filter(k => k.variant !== 'common').length}
                 </div>
               </div>
+              
+              {gameBlocked && (
+                <div className="mt-4 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                  <p className="text-center text-red-400 font-semibold">
+                    🔒 Попытки на сегодня исчерпаны
+                  </p>
+                  <p className="text-center text-sm text-muted-foreground mt-1">
+                    Возвращайтесь завтра за новыми призами!
+                  </p>
+                </div>
+              )}
 
               {/* Sound Toggle */}
               <div className="mt-6 flex items-center gap-3">
@@ -382,7 +395,8 @@ export function TreasureGame() {
             <div className={cn(
               "grid gap-4 justify-items-center",
               "grid-cols-6 sm:grid-cols-8 lg:grid-cols-12",
-              "max-w-5xl mx-auto"
+              "max-w-5xl mx-auto",
+              gameBlocked && "opacity-50 pointer-events-none"
             )}>
               {keys.map((key, index) => (
                 <MagicalKey
@@ -399,7 +413,7 @@ export function TreasureGame() {
       </div>
 
       {/* Prize Modal */}
-      <Dialog open={showModal} onOpenChange={setShowModal}>
+      <Dialog open={showModal} onOpenChange={handleCloseModal}>
         <DialogContent className="sm:max-w-4xl bg-gradient-to-b from-card to-panel border-gold-500/30">
           <DialogHeader>
             <DialogTitle className="text-3xl font-display font-bold text-center text-magical mb-4">
@@ -415,6 +429,17 @@ export function TreasureGame() {
             <div className="text-center text-muted-foreground text-sm mt-4">
               Сделайте скриншот этого купона и пришлите нам в группу <span className="text-gold-400 font-semibold">"Шоу Секрет"</span>
             </div>
+            
+            {attemptsLeft > 0 && (
+              <div className="text-center">
+                <Button 
+                  onClick={handleCloseModal}
+                  className="bg-gold-500 hover:bg-gold-600 text-black font-bold"
+                >
+                  Попробовать еще ({attemptsLeft} попыток)
+                </Button>
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
