@@ -16,6 +16,12 @@ interface MagicalTicketProps {
 
 export function MagicalTicket({ prize, className }: MagicalTicketProps) {
   const [isRevealing, setIsRevealing] = useState(false);
+  const [couponNumber] = useState(() => {
+    // Generate unique coupon number
+    const timestamp = Date.now().toString().slice(-6);
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    return `SS-${timestamp}-${random}`;
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => setIsRevealing(true), 300);
@@ -140,6 +146,11 @@ export function MagicalTicket({ prize, className }: MagicalTicketProps) {
             {prize.description}
           </p>
 
+          {/* Coupon Number */}
+          <div className="text-gold-200 text-sm font-mono bg-black/40 px-3 py-1 rounded-lg border border-gold-500/30">
+            № {couponNumber}
+          </div>
+
           {/* Rarity Badge */}
           <div className={cn(
             "px-4 py-2 rounded-full border-2 backdrop-blur-sm",
@@ -184,6 +195,13 @@ export function MagicalTicket({ prize, className }: MagicalTicketProps) {
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`
         }}
       />
+
+      {/* Bottom instruction */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-center">
+        <p className="text-xs text-gold-300/80 font-medium tracking-wide">
+          Сделайте скриншот и пришлите в группу "Шоу Секрет"
+        </p>
+      </div>
     </div>
   );
 }

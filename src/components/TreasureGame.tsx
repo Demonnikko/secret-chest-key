@@ -342,7 +342,7 @@ export function TreasureGame() {
                 <p>• Каждый ключ открывает сундук с уникальным призом</p>
                 <p>• Редкие ключи ★ дают больше шансов на крупные призы</p>
                 <p>• Эпические ключи ◆ практически гарантируют отличный приз</p>
-                <p>• Заполните форму, чтобы получить свой купон</p>
+                <p>• Сделайте скриншот купона и пришлите в группу "Шоу Секрет"</p>
               </div>
               
               <div className="mt-6 flex flex-wrap gap-3">
@@ -412,59 +412,9 @@ export function TreasureGame() {
               <MagicalTicket prize={currentPrize} />
             )}
             
-            {!showForm ? (
-              <div className="flex gap-4 justify-center flex-wrap">
-                <Button 
-                  onClick={handleTryAgain}
-                  variant="outline"
-                  className="btn-magical"
-                >
-                  Попробовать еще раз
-                </Button>
-                <Button 
-                  onClick={handleGetCoupon}
-                  className="btn-magical"
-                >
-                  Получить купон
-                </Button>
-              </div>
-            ) : (
-              <div className="space-y-4 max-w-md mx-auto">
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="name" className="text-gold-400 font-semibold">
-                      Ваше ФИО
-                    </Label>
-                    <Input
-                      id="name"
-                      placeholder="Введите полное имя"
-                      value={formData.name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      className="bg-input/50 border-gold-500/30 focus:border-gold-500"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="telegram" className="text-gold-400 font-semibold">
-                      Telegram (без @)
-                    </Label>
-                    <Input
-                      id="telegram"
-                      placeholder="username"
-                      value={formData.telegram}
-                      onChange={(e) => setFormData(prev => ({ ...prev, telegram: e.target.value }))}
-                      className="bg-input/50 border-gold-500/30 focus:border-gold-500"
-                    />
-                  </div>
-                </div>
-                <Button 
-                  onClick={handleSubmitForm}
-                  disabled={isSubmitting}
-                  className="w-full btn-magical"
-                >
-                  {isSubmitting ? "Отправляем..." : "Отправить заявку"}
-                </Button>
-              </div>
-            )}
+            <div className="text-center text-muted-foreground text-sm mt-4">
+              Сделайте скриншот этого купона и пришлите нам в группу <span className="text-gold-400 font-semibold">"Шоу Секрет"</span>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
