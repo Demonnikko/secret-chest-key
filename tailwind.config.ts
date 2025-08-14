@@ -26,8 +26,7 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -53,32 +52,16 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				gold: {
-					50: 'hsl(var(--gold-50))',
-					100: 'hsl(var(--gold-100))',
-					200: 'hsl(var(--gold-200))',
-					300: 'hsl(var(--gold-300))',
-					400: 'hsl(var(--gold-400))',
-					500: 'hsl(var(--gold-500))',
-					600: 'hsl(var(--gold-600))',
-					700: 'hsl(var(--gold-700))',
-					800: 'hsl(var(--gold-800))',
-					900: 'hsl(var(--gold-900))'
-				},
-				magical: {
-					purple: 'hsl(var(--magic-purple))',
-					blue: 'hsl(var(--magic-blue))'
+				sidebar: {
+					DEFAULT: 'hsl(var(--sidebar-background))',
+					foreground: 'hsl(var(--sidebar-foreground))',
+					primary: 'hsl(var(--sidebar-primary))',
+					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+					accent: 'hsl(var(--sidebar-accent))',
+					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+					border: 'hsl(var(--sidebar-border))',
+					ring: 'hsl(var(--sidebar-ring))'
 				}
-			},
-			fontFamily: {
-				display: ['var(--font-display)'],
-				body: ['var(--font-body)']
-			},
-			boxShadow: {
-				magical: 'var(--shadow-magical)',
-				glow: 'var(--shadow-glow)',
-				intense: 'var(--shadow-intense)',
-				'purple-glow': 'var(--shadow-purple-glow)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
