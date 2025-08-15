@@ -118,17 +118,17 @@ export function TreasureGame() {
   useEffect(() => {
     const generateKeys = () => {
       const keyCount = getKeyCount();
-      const newKeys = Array.from({ length: keyCount }, (_, index) => {
+      const newKeys = Array.from({ length: 30 }, (_, index) => {
         let variant: 'common' | 'rare' | 'epic' = 'common';
         
-        // 10% rare keys
-        if (Math.random() < 0.1) variant = 'rare';
-        // 5% epic keys  
-        if (Math.random() < 0.05) variant = 'epic';
+        // 15% редких ключей с драгоценными вставками
+        if (Math.random() < 0.15) variant = 'rare';
+        // 8% эпических ключей с магическим свечением
+        if (Math.random() < 0.08) variant = 'epic';
         
         return {
           variant,
-          rotation: Math.random() * 20 - 10 // -10 to 10 degrees
+          rotation: Math.random() * 15 - 7.5 // -7.5 to 7.5 degrees для более премиального вида
         };
       });
       setKeys(newKeys);
@@ -301,102 +301,123 @@ export function TreasureGame() {
       </div>
 
       <div className="container mx-auto px-4 py-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="mb-6">
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-gold-400 tracking-wider mb-2">
-              ШОУ • СЕКРЕТ
+        {/* Театральный заголовок */}
+        <div className="text-center mb-16 relative z-20">
+          <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-display font-black text-premium tracking-wider mb-4 text-theatrical-glow">
+              ШОУ СЕКРЕТ — ОФИЦИАЛЬНАЯ ИГРА
             </h2>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-magical mb-4">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-premium mb-6 text-theatrical-glow">
               Сундук удачи
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-foreground/90 max-w-4xl mx-auto font-display font-semibold leading-relaxed">
               Выберите магический ключ и откройте сундук, чтобы получить скидку или бесплатный билет на самое загадочное шоу года
             </p>
           </div>
         </div>
 
-        {/* Game Area */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          {/* Chest Section */}
-          <div className="panel-magical p-6">
-            <TreasureChest 
-              isShaking={isChestShaking}
-              isOpening={isChestOpening}
-              onAnimationComplete={handleChestAnimationComplete}
-            />
+        {/* Театральная сцена */}
+        <div className="theater-stage relative max-w-7xl mx-auto min-h-[800px] mb-16 theater-vignette">
+          {/* Бархатные кулисы */}
+          <div className="curtain-left animate-curtain-sway"></div>
+          <div className="curtain-right animate-curtain-sway"></div>
+          
+          {/* Софиты */}
+          <div className="spotlights">
+            <div className="spotlight" style={{ left: '15%' }}></div>
+            <div className="spotlight" style={{ left: '30%', animationDelay: '2s' }}></div>
+            <div className="spotlight" style={{ left: '45%', animationDelay: '4s' }}></div>
+            <div className="spotlight" style={{ left: '60%', animationDelay: '1s' }}></div>
+            <div className="spotlight" style={{ left: '75%', animationDelay: '3s' }}></div>
           </div>
+          
+          {/* Глянцевый пол сцены */}
+          <div className="stage-floor"></div>
+          
+          {/* Основной контент сцены */}
+          <div className="relative z-10 grid lg:grid-cols-2 gap-12 p-8 min-h-[700px]">
+            {/* Сундук */}
+            <div className="flex items-center justify-center">
+              <TreasureChest 
+                isShaking={isChestShaking}
+                isOpening={isChestOpening}
+                onAnimationComplete={handleChestAnimationComplete}
+              />
+            </div>
 
-          {/* Rules and Controls */}
-          <div className="space-y-6">
-            <div className="panel-magical p-6">
-              <h2 className="text-2xl font-display font-bold text-gold-400 mb-4">
-                Правила игры
-              </h2>
-              <div className="space-y-3 text-muted-foreground">
-                <p>• Выберите любой ключ из магической коллекции</p>
-                <p>• Каждый ключ открывает сундук с уникальным призом</p>
-                <p>• Редкие ключи ★ дают больше шансов на крупные призы</p>
-                <p>• Эпические ключи ◆ практически гарантируют отличный приз</p>
-                <p>• У вас есть 3 попытки в день</p>
-                <p>• Сделайте скриншот купона и пришлите в группу "Шоу Секрет"</p>
-              </div>
-              
-              <div className="mt-6 flex flex-wrap gap-3">
-                <div className={cn(
-                  "px-3 py-2 border rounded-lg text-sm",
-                  attemptsLeft > 0 
-                    ? "bg-gold-500/10 border-gold-500/30" 
-                    : "bg-red-500/10 border-red-500/30"
-                )}>
-                  Попыток осталось: {attemptsLeft}
+            {/* Правила игры */}
+            <div className="flex flex-col justify-center space-y-8">
+              <div className="panel-theater p-8">
+                <h2 className="text-3xl font-display font-black text-premium mb-6 text-theatrical-glow">
+                  Правила игры
+                </h2>
+                <div className="space-y-4 text-foreground/90 text-lg font-display font-semibold">
+                  <p>• Выберите любой ключ из магической коллекции</p>
+                  <p>• Каждый ключ открывает сундук с уникальным призом</p>
+                  <p>• Редкие ключи ★ дают больше шансов на крупные призы</p>
+                  <p>• Эпические ключи ◆ практически гарантируют отличный приз</p>
+                  <p>• У вас есть 3 попытки в день</p>
+                  <p>• Сделайте скриншот купона и пришлите в группу "Шоу Секрет"</p>
                 </div>
-                <div className="px-3 py-2 bg-purple-500/10 border border-purple-500/30 rounded-lg text-sm">
-                  Редких ключей: {keys.filter(k => k.variant !== 'common').length}
+                
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <div className={cn(
+                    "px-4 py-3 border-2 rounded-xl text-base font-display font-bold",
+                    attemptsLeft > 0 
+                      ? "bg-gradient-gold-theater/20 border-gold-500/50 text-gold-300" 
+                      : "bg-red-500/20 border-red-500/50 text-red-300"
+                  )}>
+                    Попыток осталось: {attemptsLeft}
+                  </div>
+                  <div className="px-4 py-3 bg-purple-500/20 border-2 border-purple-500/50 rounded-xl text-base font-display font-bold text-purple-300">
+                    Редких ключей: {keys.filter(k => k.variant !== 'common').length}
+                  </div>
                 </div>
-              </div>
-              
-              {gameBlocked && (
-                <div className="mt-4 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                  <p className="text-center text-red-400 font-semibold">
-                    🔒 Попытки на сегодня исчерпаны
-                  </p>
-                  <p className="text-center text-sm text-muted-foreground mt-1">
-                    Возвращайтесь завтра за новыми призами!
-                  </p>
-                </div>
-              )}
+                
+                {gameBlocked && (
+                  <div className="mt-6 p-6 bg-red-500/20 border-2 border-red-500/50 rounded-xl">
+                    <p className="text-center text-red-300 font-display font-black text-xl">
+                      🔒 Попытки на сегодня исчерпаны
+                    </p>
+                    <p className="text-center text-red-400/80 font-display font-semibold mt-2">
+                      Возвращайтесь завтра за новыми призами!
+                    </p>
+                  </div>
+                )}
 
-              {/* Sound Toggle */}
-              <div className="mt-6 flex items-center gap-3">
-                <span className="text-sm text-muted-foreground">Звук:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  className={cn(
-                    "transition-colors",
-                    soundEnabled ? "bg-gold-500/20 border-gold-500/50" : "bg-muted/20"
-                  )}
-                >
-                  {soundEnabled ? "🔊 Вкл" : "🔇 Выкл"}
-                </Button>
+                {/* Звуковые настройки */}
+                <div className="mt-8 flex items-center gap-4">
+                  <span className="text-lg text-foreground/80 font-display font-semibold">Звук:</span>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => setSoundEnabled(!soundEnabled)}
+                    className={cn(
+                      "transition-premium font-display font-bold border-2",
+                      soundEnabled 
+                        ? "bg-gradient-gold-theater/30 border-gold-500/60 text-gold-300 glow-gold-theater" 
+                        : "bg-muted/20 border-muted/40 text-muted-foreground"
+                    )}
+                  >
+                    {soundEnabled ? "🔊 Включен" : "🔇 Выключен"}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Keys Grid */}
-        <div className="mt-12">
-          <div className="panel-magical p-6">
-            <h3 className="text-xl font-display font-bold text-gold-400 mb-6 text-center">
+        {/* Коллекция премиальных ключей */}
+        <div className="max-w-7xl mx-auto">
+          <div className="panel-theater p-8">
+            <h3 className="text-3xl font-display font-black text-premium mb-8 text-center text-theatrical-glow">
               Выберите магический ключ
             </h3>
             <div className={cn(
-              "grid gap-4 justify-items-center",
-              "grid-cols-6 sm:grid-cols-8 lg:grid-cols-12",
-              "max-w-5xl mx-auto",
-              gameBlocked && "opacity-50 pointer-events-none"
+              "grid gap-6 justify-items-center",
+              "grid-cols-5 sm:grid-cols-6 lg:grid-cols-10",
+              "max-w-6xl mx-auto",
+              gameBlocked && "opacity-30 pointer-events-none filter grayscale"
             )}>
               {keys.map((key, index) => (
                 <MagicalKey

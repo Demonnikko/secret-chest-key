@@ -2,22 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* MAGICAL MYSTERY SHOW DESIGN SYSTEM */
+/* ТЕАТРАЛЬНОЕ ШОУ "СЕКРЕТ" - ДИЗАЙН СИСТЕМА */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    /* Core Colors - Dark Mystical Theme */
-    --background: 228 84% 3%;
+    /* Театральная палитра */
+    --background: 0 0% 4%;
     --foreground: 48 95% 95%;
     
-    /* Magical Surfaces */
-    --card: 225 84% 4%;
-    --card-foreground: 48 95% 95%;
-    --panel: 225 84% 5%;
-    --panel-glow: 225 84% 8%;
+    /* Темно-вишневые кулисы */
+    --curtain: 348 65% 15%;
+    --curtain-shadow: 348 75% 8%;
+    --curtain-highlight: 348 45% 25%;
     
-    /* Golden Magic Colors */
+    /* Черный глянцевый пол сцены */
+    --stage-floor: 0 0% 8%;
+    --stage-floor-reflection: 0 0% 12%;
+    
+    /* Золотая роскошь */
     --gold-50: 48 100% 96%;
     --gold-100: 48 96% 89%;
     --gold-200: 47 93% 77%;
@@ -29,54 +32,78 @@
     --gold-800: 28 73% 26%;
     --gold-900: 27 69% 14%;
     
-    /* Primary Golden Theme */
+    /* Серебро премиум */
+    --silver-100: 240 10% 95%;
+    --silver-300: 240 6% 83%;
+    --silver-500: 240 5% 64%;
+    --silver-700: 240 4% 46%;
+    --silver-900: 240 6% 10%;
+    
+    /* Платина люкс */
+    --platinum-100: 260 15% 95%;
+    --platinum-300: 260 10% 85%;
+    --platinum-500: 260 8% 70%;
+    --platinum-700: 260 12% 50%;
+    --platinum-900: 260 20% 25%;
+    
+    /* Алмазные переливы */
+    --diamond-100: 180 50% 95%;
+    --diamond-300: 200 40% 85%;
+    --diamond-500: 220 30% 75%;
+    --diamond-700: 240 25% 65%;
+    --diamond-900: 260 35% 45%;
+    
+    /* Основные цвета */
     --primary: 42 87% 55%;
-    --primary-foreground: 228 84% 3%;
+    --primary-foreground: 0 0% 4%;
     --primary-glow: 42 87% 65%;
     
-    /* Secondary Deep Purple */
-    --secondary: 258 84% 15%;
+    --secondary: 348 65% 15%;
     --secondary-foreground: 48 95% 95%;
     
-    /* Magical Accents */
+    /* Магические акценты */
     --accent: 280 100% 70%;
-    --accent-foreground: 228 84% 3%;
+    --accent-foreground: 0 0% 4%;
     --magic-purple: 280 100% 50%;
     --magic-blue: 240 100% 70%;
     
-    /* Mystical Effects */
-    --shadow-color: 228 84% 2%;
-    --glow-gold: 42 87% 55%;
-    --glow-purple: 280 100% 70%;
-    --shimmer: 48 100% 80%;
-    
-    /* Interactive States */
-    --muted: 225 84% 12%;
+    /* Интерактивные состояния */
+    --muted: 0 0% 10%;
     --muted-foreground: 48 30% 70%;
-    --border: 225 84% 15%;
-    --input: 225 84% 8%;
+    --border: 42 87% 55%;
+    --input: 0 0% 8%;
     --ring: 42 87% 55%;
     
-    /* Gradients */
+    /* Театральные градиенты */
+    --gradient-curtain: linear-gradient(180deg, hsl(348 45% 25%), hsl(348 65% 15%), hsl(348 75% 8%));
+    --gradient-stage: linear-gradient(180deg, hsl(0 0% 12%), hsl(0 0% 8%), hsl(0 0% 4%));
     --gradient-gold: linear-gradient(135deg, hsl(48 100% 80%), hsl(42 87% 55%), hsl(32 81% 39%));
-    --gradient-magic: linear-gradient(135deg, hsl(280 100% 70%), hsl(240 100% 70%), hsl(42 87% 55%));
-    --gradient-chest: linear-gradient(180deg, hsl(28 73% 26%), hsl(27 69% 14%), hsl(228 84% 3%));
-    --gradient-panel: linear-gradient(180deg, hsl(225 84% 5%), hsl(225 84% 4%), hsl(228 84% 3%));
+    --gradient-silver: linear-gradient(135deg, hsl(240 10% 95%), hsl(240 5% 64%), hsl(240 6% 10%));
+    --gradient-platinum: linear-gradient(135deg, hsl(260 15% 95%), hsl(260 8% 70%), hsl(260 20% 25%));
+    --gradient-diamond: linear-gradient(135deg, hsl(180 50% 95%), hsl(220 30% 75%), hsl(260 35% 45%));
+    --gradient-bronze: linear-gradient(135deg, hsl(30 85% 75%), hsl(25 75% 55%), hsl(20 65% 35%));
     
-    /* Shadows & Effects */
-    --shadow-magical: 0 25px 50px -12px hsl(228 84% 2% / 0.8);
-    --shadow-glow: 0 0 40px hsl(42 87% 55% / 0.3);
-    --shadow-intense: 0 0 60px hsl(42 87% 55% / 0.5);
-    --shadow-purple-glow: 0 0 30px hsl(280 100% 70% / 0.4);
+    /* Освещение софитов */
+    --spotlight: 48 100% 95%;
+    --spotlight-warm: 42 100% 88%;
+    --spotlight-cool: 200 100% 88%;
     
-    /* Typography */
+    /* Тени и эффекты */
+    --shadow-stage: 0 40px 80px -20px hsl(0 0% 0% / 0.9);
+    --shadow-spotlight: 0 0 100px hsl(48 100% 80% / 0.4);
+    --shadow-gold: 0 0 40px hsl(42 87% 55% / 0.5);
+    --shadow-silver: 0 0 30px hsl(240 5% 64% / 0.4);
+    --shadow-platinum: 0 0 35px hsl(260 8% 70% / 0.4);
+    --shadow-diamond: 0 0 50px hsl(220 30% 75% / 0.6);
+    
+    /* Типографика премиум */
     --font-display: 'Cinzel', serif;
     --font-body: 'Inter', system-ui, sans-serif;
     
-    /* Animations */
+    /* Анимации */
+    --transition-theatrical: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-magical: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
     --radius: 1rem;
   }
@@ -89,12 +116,15 @@
   
   body {
     @apply bg-background text-foreground font-body;
+    /* Театральный зал с виньеткой */
     background: 
-      radial-gradient(120% 100% at 50% -10%, hsl(225 84% 6%) 0%, hsl(225 84% 4%) 40%, hsl(228 84% 3%) 100%),
-      radial-gradient(80% 60% at 50% 120%, hsl(42 87% 55% / 0.05) 0%, transparent 70%);
+      radial-gradient(ellipse 80% 40% at 50% 100%, hsl(0 0% 8%) 0%, transparent 60%),
+      radial-gradient(ellipse 120% 80% at 50% 0%, hsl(348 65% 15% / 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(0 0% 4%) 0%, hsl(0 0% 2%) 100%);
     background-attachment: fixed;
     overflow-x: hidden;
     min-height: 100vh;
+    position: relative;
   }
   
   /* Magical noise texture overlay */
@@ -110,93 +140,260 @@
 }
 
 @layer components {
-  /* Magical Button Variants */
-  .btn-magical {
+  /* Театральная сцена */
+  .theater-stage {
+    position: relative;
+    background: var(--gradient-stage);
+    border-radius: 2rem 2rem 0 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-stage);
+  }
+  
+  .theater-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 150% 100% at 50% 0%, hsl(348 65% 15% / 0.8) 0%, transparent 40%),
+      linear-gradient(180deg, transparent 0%, hsl(0 0% 4%) 100%);
+    pointer-events: none;
+  }
+  
+  /* Бархатные кулисы */
+  .curtain-left, .curtain-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    background: var(--gradient-curtain);
+    z-index: 10;
+  }
+  
+  .curtain-left {
+    left: -60px;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 20px 0 40px hsl(348 75% 8% / 0.8);
+    background-image: 
+      repeating-linear-gradient(90deg, 
+        transparent 0px, 
+        hsl(348 45% 25% / 0.3) 2px, 
+        transparent 4px, 
+        hsl(348 75% 8% / 0.3) 6px
+      );
+  }
+  
+  .curtain-right {
+    right: -60px;
+    border-radius: 30px 0 0 30px;
+    box-shadow: -20px 0 40px hsl(348 75% 8% / 0.8);
+    background-image: 
+      repeating-linear-gradient(90deg, 
+        transparent 0px, 
+        hsl(348 45% 25% / 0.3) 2px, 
+        transparent 4px, 
+        hsl(348 75% 8% / 0.3) 6px
+      );
+  }
+  
+  /* Софиты */
+  .spotlights {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 5;
+  }
+  
+  .spotlight {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background: hsl(27 69% 14%);
+    border-radius: 0 0 50% 50%;
+    box-shadow: 
+      inset 0 -5px 10px hsl(0 0% 0% / 0.5),
+      0 5px 15px hsl(0 0% 0% / 0.3);
+  }
+  
+  .spotlight::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(ellipse at center, hsl(48 100% 95% / 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    animation: spotlight-sweep 8s linear infinite;
+  }
+  
+  /* Глянцевый пол сцены */
+  .stage-floor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: var(--gradient-stage);
+    border-top: 1px solid hsl(42 87% 55% / 0.2);
+  }
+  
+  .stage-floor::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, hsl(0 0% 12% / 0.3) 100%);
+    border-radius: 0 0 2rem 2rem;
+  }
+  
+  /* Премиальные кнопки */
+  .btn-premium {
     @apply relative overflow-hidden;
     background: var(--gradient-gold);
     border: 3px solid hsl(27 69% 14%);
     box-shadow: 
-      inset 0 2px 0 hsl(48 100% 80% / 0.3),
-      inset 0 -2px 0 hsl(28 73% 26% / 0.5),
-      var(--shadow-glow),
-      var(--shadow-magical);
-    transition: var(--transition-magical);
+      inset 0 3px 0 hsl(48 100% 80% / 0.4),
+      inset 0 -3px 0 hsl(28 73% 26% / 0.6),
+      var(--shadow-gold),
+      var(--shadow-stage);
+    transition: var(--transition-theatrical);
     font-family: var(--font-display);
     font-weight: 800;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: hsl(228 84% 3%);
+    color: hsl(0 0% 4%);
   }
   
-  .btn-magical::before {
+  .btn-premium::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(45deg, transparent 30%, hsl(48 100% 90% / 0.3) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
+    background: linear-gradient(45deg, transparent 30%, hsl(48 100% 95% / 0.4) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.8s;
   }
   
-  .btn-magical:hover::before {
-    transform: translateX(100%);
+  .btn-premium:hover::before {
+    transform: translateX(120%);
   }
   
-  .btn-magical:hover {
+  .btn-premium:hover {
     box-shadow: 
-      inset 0 2px 0 hsl(48 100% 80% / 0.4),
-      inset 0 -2px 0 hsl(28 73% 26% / 0.6),
-      var(--shadow-intense),
-      0 8px 25px hsl(228 84% 2% / 0.4);
-    transform: translateY(-2px);
+      inset 0 3px 0 hsl(48 100% 80% / 0.5),
+      inset 0 -3px 0 hsl(28 73% 26% / 0.7),
+      var(--shadow-spotlight),
+      0 12px 30px hsl(0 0% 0% / 0.5);
+    transform: translateY(-3px) scale(1.02);
   }
   
-  .btn-magical:active {
-    transform: translateY(0);
+  .btn-premium:active {
+    transform: translateY(0) scale(1);
     box-shadow: 
-      inset 0 2px 0 hsl(48 100% 80% / 0.2),
-      inset 0 -2px 0 hsl(28 73% 26% / 0.7),
-      var(--shadow-glow),
-      0 4px 15px hsl(228 84% 2% / 0.3);
+      inset 0 2px 0 hsl(48 100% 80% / 0.3),
+      inset 0 -4px 0 hsl(28 73% 26% / 0.8),
+      var(--shadow-gold),
+      0 6px 20px hsl(0 0% 0% / 0.4);
   }
   
-  /* Magical Panel */
-  .panel-magical {
-    background: var(--gradient-panel);
-    border: 2px solid hsl(225 84% 15%);
+  /* Театральная панель */
+  .panel-theater {
+    background: 
+      linear-gradient(135deg, hsl(0 0% 8% / 0.9), hsl(0 0% 6% / 0.9)),
+      var(--gradient-stage);
+    border: 2px solid hsl(42 87% 55% / 0.3);
     border-radius: var(--radius);
     box-shadow: 
-      var(--shadow-magical),
-      inset 0 1px 0 hsl(48 95% 95% / 0.03),
-      0 0 0 1px hsl(225 84% 8%);
+      var(--shadow-stage),
+      inset 0 2px 0 hsl(48 100% 80% / 0.05),
+      0 0 0 1px hsl(42 87% 55% / 0.1);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
   }
   
-  .panel-magical::before {
+  .panel-theater::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(42 87% 55% / 0.05), transparent 40%);
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(42 87% 55% / 0.08), transparent 50%);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.4s;
     pointer-events: none;
   }
   
-  .panel-magical:hover::before {
+  .panel-theater:hover::before {
     opacity: 1;
   }
   
-  /* Magical Text Glow */
-  .text-magical {
+  /* Премиальный текст */
+  .text-premium {
     background: var(--gradient-gold);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px hsl(42 87% 55% / 0.5);
+    text-shadow: 0 0 40px hsl(42 87% 55% / 0.6);
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: 0.1em;
+    font-weight: 900;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
+    position: relative;
+  }
+  
+  /* Типы купонов */
+  .ticket-wood {
+    background: 
+      var(--gradient-bronze),
+      repeating-linear-gradient(90deg, 
+        hsl(30 60% 40% / 0.1) 0px, 
+        transparent 2px, 
+        hsl(30 60% 40% / 0.1) 4px, 
+        transparent 6px
+      );
+    border: 3px solid hsl(30 60% 25%);
+    box-shadow: var(--shadow-stage);
+  }
+  
+  .ticket-bronze {
+    background: var(--gradient-bronze);
+    border: 3px solid hsl(25 75% 35%);
+    box-shadow: var(--shadow-gold);
+  }
+  
+  .ticket-silver {
+    background: var(--gradient-silver);
+    border: 3px solid hsl(240 6% 10%);
+    box-shadow: var(--shadow-silver);
+  }
+  
+  .ticket-gold {
+    background: var(--gradient-gold);
+    border: 3px solid hsl(32 81% 39%);
+    box-shadow: var(--shadow-gold);
+  }
+  
+  .ticket-platinum {
+    background: var(--gradient-platinum);
+    border: 3px solid hsl(260 20% 25%);
+    box-shadow: var(--shadow-platinum);
+  }
+  
+  .ticket-diamond {
+    background: var(--gradient-diamond);
+    border: 3px solid hsl(260 35% 45%);
+    box-shadow: var(--shadow-diamond);
+    position: relative;
+  }
+  
+  .ticket-diamond::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 25% 25%, hsl(180 50% 95% / 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(200 40% 85% / 0.3) 0%, transparent 50%);
+    border-radius: inherit;
   }
   
   /* Particle Effect Classes */
@@ -238,114 +435,216 @@
 }
 
 @layer utilities {
-  /* Animation Keyframes */
-  @keyframes sparkle {
-    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-    50% { transform: translateY(-10px) rotate(180deg); opacity: 0.8; }
+  /* Театральные анимации */
+  @keyframes spotlight-sweep {
+    0% { transform: translateX(-50%) rotate(-15deg); opacity: 0.1; }
+    25% { opacity: 0.3; }
+    50% { transform: translateX(-50%) rotate(0deg); opacity: 0.4; }
+    75% { opacity: 0.3; }
+    100% { transform: translateX(-50%) rotate(15deg); opacity: 0.1; }
   }
   
-  @keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
+  @keyframes curtain-sway {
+    0%, 100% { transform: scaleX(1) skewX(0deg); }
+    50% { transform: scaleX(1.02) skewX(1deg); }
   }
   
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+  @keyframes chest-theatrical-shake {
+    0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+    10% { transform: translateX(-8px) translateY(-2px) scale(1.01) rotate(-2deg); }
+    20% { transform: translateX(8px) translateY(2px) scale(0.99) rotate(2deg); }
+    30% { transform: translateX(-6px) translateY(-1px) scale(1.01) rotate(-1deg); }
+    40% { transform: translateX(6px) translateY(1px) scale(0.99) rotate(1deg); }
+    50% { transform: translateX(-4px) translateY(0px) scale(1) rotate(-0.5deg); }
+    60% { transform: translateX(4px) translateY(0px) scale(1) rotate(0.5deg); }
+    70% { transform: translateX(-2px) translateY(0px) scale(1) rotate(0deg); }
+    80% { transform: translateX(2px) translateY(0px) scale(1) rotate(0deg); }
   }
   
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: var(--shadow-glow); }
-    50% { box-shadow: var(--shadow-intense); }
+  @keyframes chest-explosion-open {
+    0% { transform: rotateX(0deg) scale(1); }
+    15% { transform: rotateX(-20deg) scale(1.05); }
+    35% { transform: rotateX(-95deg) scale(1.1); }
+    50% { transform: rotateX(-85deg) scale(1.05); }
+    65% { transform: rotateX(-90deg) scale(1.02); }
+    100% { transform: rotateX(-88deg) scale(1); }
   }
   
-  @keyframes magical-rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  @keyframes magical-glow-pulse {
+    0%, 100% { 
+      box-shadow: 
+        var(--shadow-gold),
+        0 0 20px hsl(42 87% 55% / 0.3);
+    }
+    50% { 
+      box-shadow: 
+        var(--shadow-spotlight),
+        0 0 60px hsl(42 87% 55% / 0.6),
+        0 0 100px hsl(48 100% 80% / 0.4);
+    }
   }
   
-  @keyframes chest-shake {
-    0%, 100% { transform: translateX(0); }
-    10% { transform: translateX(-4px) rotate(-1deg); }
-    20% { transform: translateX(4px) rotate(1deg); }
-    30% { transform: translateX(-3px) rotate(-0.5deg); }
-    40% { transform: translateX(3px) rotate(0.5deg); }
-    50% { transform: translateX(-2px) rotate(-0.25deg); }
-    60% { transform: translateX(2px) rotate(0.25deg); }
+  @keyframes ticket-reveal {
+    0% { 
+      transform: translateY(100px) rotateX(90deg) scale(0.8); 
+      opacity: 0; 
+    }
+    50% { 
+      transform: translateY(-10px) rotateX(5deg) scale(1.05); 
+      opacity: 0.8; 
+    }
+    100% { 
+      transform: translateY(0) rotateX(0deg) scale(1); 
+      opacity: 1; 
+    }
   }
   
-  @keyframes lid-open {
-    0% { transform: rotateX(0deg); }
-    20% { transform: rotateX(-15deg); }
-    50% { transform: rotateX(-85deg); }
-    70% { transform: rotateX(-75deg); }
-    100% { transform: rotateX(-78deg); }
+  @keyframes premium-key-hover {
+    0% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+    100% { 
+      transform: translateY(-12px) rotate(-8deg) scale(1.15); 
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.4)) drop-shadow(0 0 20px rgba(251,191,36,0.8));
+    }
   }
   
-  @keyframes key-hover {
-    0% { transform: translateY(0) rotate(0deg) scale(1); }
-    100% { transform: translateY(-8px) rotate(-5deg) scale(1.1); }
+  @keyframes diamond-sparkle {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg) scale(1); 
+      opacity: 0.4; 
+    }
+    25% { 
+      transform: translateY(-8px) rotate(90deg) scale(1.2); 
+      opacity: 0.8; 
+    }
+    50% { 
+      transform: translateY(-12px) rotate(180deg) scale(1.4); 
+      opacity: 1; 
+    }
+    75% { 
+      transform: translateY(-8px) rotate(270deg) scale(1.2); 
+      opacity: 0.8; 
+    }
   }
   
-  @keyframes confetti-fall {
+  @keyframes confetti-explosion {
     0% {
-      transform: translateY(-100vh) rotate(0deg);
+      transform: translateY(0) rotate(0deg) scale(1);
       opacity: 1;
     }
+    25% {
+      transform: translateY(-50vh) rotate(180deg) scale(1.2);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(-80vh) rotate(360deg) scale(1);
+      opacity: 0.7;
+    }
     100% {
-      transform: translateY(100vh) rotate(360deg);
+      transform: translateY(-120vh) rotate(540deg) scale(0.8);
       opacity: 0;
     }
   }
   
-  /* Animation Classes */
-  .animate-float { animation: float 3s ease-in-out infinite; }
-  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-  .animate-magical-rotate { animation: magical-rotate 10s linear infinite; }
-  .animate-chest-shake { animation: chest-shake 0.6s ease-in-out; }
-  .animate-lid-open { animation: lid-open 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
-  .animate-key-hover { animation: key-hover 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+  /* Театральные анимации */
+  .animate-spotlight-sweep { animation: spotlight-sweep 8s linear infinite; }
+  .animate-curtain-sway { animation: curtain-sway 6s ease-in-out infinite; }
+  .animate-chest-theatrical-shake { animation: chest-theatrical-shake 1s ease-in-out; }
+  .animate-chest-explosion-open { animation: chest-explosion-open 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+  .animate-magical-glow-pulse { animation: magical-glow-pulse 2s ease-in-out infinite; }
+  .animate-ticket-reveal { animation: ticket-reveal 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+  .animate-premium-key-hover { animation: premium-key-hover 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+  .animate-diamond-sparkle { animation: diamond-sparkle 4s ease-in-out infinite; }
+  .animate-confetti-explosion { animation: confetti-explosion 3s ease-out forwards; }
   
-  /* Utility Classes */
-  .text-glow {
-    text-shadow: 0 0 20px hsl(42 87% 55% / 0.6), 0 0 40px hsl(42 87% 55% / 0.4);
+  /* Театральные утилиты */
+  .text-theatrical-glow {
+    text-shadow: 
+      0 0 30px hsl(42 87% 55% / 0.8), 
+      0 0 60px hsl(42 87% 55% / 0.5),
+      0 4px 8px hsl(0 0% 0% / 0.8);
   }
   
-  .glow-gold {
-    box-shadow: var(--shadow-glow);
+  .glow-gold-theater {
+    box-shadow: var(--shadow-gold);
   }
   
-  .glow-intense {
-    box-shadow: var(--shadow-intense);
+  .glow-spotlight {
+    box-shadow: var(--shadow-spotlight);
   }
   
-  .glow-purple {
-    box-shadow: var(--shadow-purple-glow);
+  .glow-silver {
+    box-shadow: var(--shadow-silver);
   }
   
-  .border-magical {
-    border: 2px solid hsl(42 87% 55% / 0.3);
-    box-shadow: inset 0 0 20px hsl(42 87% 55% / 0.1);
+  .glow-platinum {
+    box-shadow: var(--shadow-platinum);
   }
   
-  .bg-magical-dark {
-    background: hsl(228 84% 3%);
+  .glow-diamond {
+    box-shadow: var(--shadow-diamond);
   }
   
-  .bg-gradient-gold {
+  .border-premium {
+    border: 3px solid hsl(42 87% 55% / 0.4);
+    box-shadow: 
+      inset 0 0 30px hsl(42 87% 55% / 0.1),
+      0 0 20px hsl(42 87% 55% / 0.2);
+  }
+  
+  .bg-stage-dark {
+    background: hsl(0 0% 4%);
+  }
+  
+  .bg-curtain {
+    background: var(--gradient-curtain);
+  }
+  
+  .bg-gradient-gold-theater {
     background: var(--gradient-gold);
   }
   
-  .bg-gradient-magic {
-    background: var(--gradient-magic);
+  .bg-gradient-silver-theater {
+    background: var(--gradient-silver);
   }
   
-  .transition-magical {
+  .bg-gradient-platinum-theater {
+    background: var(--gradient-platinum);
+  }
+  
+  .bg-gradient-diamond-theater {
+    background: var(--gradient-diamond);
+  }
+  
+  .transition-theatrical {
+    transition: var(--transition-theatrical);
+  }
+  
+  .transition-premium {
     transition: var(--transition-magical);
   }
   
-  .transition-bounce {
-    transition: var(--transition-bounce);
+  .perspective-theater {
+    perspective: 1500px;
+  }
+  
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .theater-vignette {
+    position: relative;
+  }
+  
+  .theater-vignette::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, hsl(0 0% 0% / 0.3) 100%);
+    pointer-events: none;
+    border-radius: inherit;
   }
 }
 
